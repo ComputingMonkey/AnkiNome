@@ -6,9 +6,18 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "csv": "^5.3.2",
+    "d3": "^5.16.0",
+    "fs": "0.0.1-security",
+    "fs-react": "0.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-native-fs": "^2.16.6",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "xhr2": "^0.2.0",
+    "xmlhttprequest": "^1.8.0",
+    "xmlhttprequest2": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
