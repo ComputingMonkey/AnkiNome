@@ -15,10 +15,63 @@ import Main from './components/main'
 import * as d3 from 'd3';
 import databook from './root.csv';
 
-d3.csv(databook, function(databook) { console.log(databook); });
+d3.csv(databook, function(databook) { console.log(''); });
+var pagebook = []
+d3.csv(databook).then(function(databook) {
+  var row = [];
+  for(let i = 0; i < databook.length; i++){
+    row.push(databook[i])
+    if(row.length == 10){
+      pagebook.push(row);
+      row = []
+    }
+    if(i == databook.length - 1){
+      pagebook.push(row);
+    }
+  }
+}).catch(function(err) {
+  throw err;
+})
+// global.pagebook = pagebook
 
 class App extends React.Component {
   constructor(props) {
+    // var pagebook = []
+    // d3.csv(databook).then(function(databook) {
+    //   var row = [];
+    //   for(let i = 0; i < databook.length; i++){
+    //     row.push(databook[i])
+    //     if(row.length == 10){
+    //       pagebook.push(row);
+    //       row = []
+    //     }
+    //     if(i == databook.length - 1){
+    //       pagebook.push(row);
+    //     }
+    //   }
+    // }).catch(function(err) {
+    //   throw err;
+    // })
+    // global.pagebook = pagebook
+    var fixed_data = [[0,'zero'],[1,'ichi'],[2,'zero'],[3,'ichi'],[4,'zero'],[5,'ichi'],[6,'zero'],[7,'ichi'],[8,'zero'],[9,'ichi']];
+    var view_data =  [[0,'zero'],[1,'ichi'],[2,'zero'],[3,'ichi'],[4,'zero'],[5,'ichi'],[6,'zero'],[7,'ichi'],[8,'zero'],[9,'ichi']];
+    var hoge_data = [[],[]];
+    super(props);
+    this.state = ({
+      fixed_data: fixed_data,
+      view_data: view_data,
+      row: 0,
+      page: 0,
+      data: [],
+      databook: databook,
+      // pagebook: pagebook,
+      page: 0,
+      hoge_data: ['default','','','','','','','','',''],
+    })
+    // this.getData = this.getData.bind(this);
+  }
+  // ーーーーーーーーーーcsvーーーーーーーーーー
+  getPagebook() {
     var pagebook = []
     d3.csv(databook).then(function(databook) {
       var row = [];
@@ -31,35 +84,25 @@ class App extends React.Component {
         if(i == databook.length - 1){
           pagebook.push(row);
         }
+        // console.log(pagebook);
       }
+      console.log(pagebook);
+      return pagebook;
     }).catch(function(err) {
       throw err;
     })
-    var fixed_data = [[0,'zero'],[1,'ichi']];
-    var view_data = [[0,'zero'],[1,'ichi']];
-    super(props);
-    this.state = ({
-      fixed_data: fixed_data,
-      view_data: view_data,
-      row: 0,
-      page: 0,
-      data: [],
-      databook: databook,
-      pagebook: pagebook,
-      page: 0,
-    })
-    // this.getData = this.getData.bind(this);
+
   }
-  // ーーーーーーーーーーcsvーーーーーーーーーー
   popCsv() {
-    for(var i = 0; i < this.state.pagebook.length; i++){
-      console.log(this.state.pagebook[i]);
-    }
+    // for(var i = 0; i < this.state.pagebook.length; i++){
+    //   console.log(this.state.pagebook[i]);
+    // }
+    console.log(this.state.hoge_data)
   }
   // ーーーーーーーーーーーーーーーーーーーー
   countRow() {
     //
-    if(this.state.row < 2){
+    if(this.state.row < 10){
       // activate_view_gradually
       var mdfd_data = []
 
@@ -69,9 +112,9 @@ class App extends React.Component {
       }
 
       // hidden
-      for(var i = this.state.row;i <= 2 - this.state.row; i++){
-        if(i != 2){
-          mdfd_data.push([ this.state.fixed_data[i][0],'ーーーーー' ])
+      for(var i = this.state.row;i <= 10; i++){
+        if(i != 10){
+          mdfd_data.push([ this.state.fixed_data[i][0],'-----' ])
         }
       }
 
@@ -87,15 +130,33 @@ class App extends React.Component {
     }
   }
   plusPage() {
-    this.setState({page: this.state.page + 1})
+    if(this.state.page < pagebook.length - 1 ){
+      this.setState({page: this.state.page + 1})
+    }
   }
   minusPage() {
-    this.setState({page: this.state.page - 1})
+    if(this.state.page > 0){
+      this.setState({page: this.state.page - 1})
+    }
+  }
+  setPage(){
+    // var pagebook = this.getPagebook()
+    var page = this.state.page
+    // this.setState({hoge_data: pagebook[page]})
+    var hoge_data = []
+    for(var i = 0; i < pagebook[page].length; i++){
+      console.log(pagebook[page][i])
+      var root = pagebook[page][i]['root']
+      console.log(root);
+      var meaning = pagebook[page][i]['meaning']
+      hoge_data.push([root,meaning])
+    }
+    this.setState({hoge_data: hoge_data})
   }
   render(){
     return (
       <div>
-        <h5>{this.state.databook}</h5>
+
         <table border='2' rules='all'>
           <tbody>
             {this.state.view_data.map(( value, index, array) => {
@@ -109,13 +170,14 @@ class App extends React.Component {
           </tbody>
         </table>
         <button onClick={() => {this.countRow()}}>row+</button>
-        <h1>{'now:' + this.state.row}</h1>
+        <h1>{'now:' + (this.state.row - 1)}</h1>
         <h1>{'next:' + this.state.row}</h1>
         <h2>{'nowPage:' + this.state.page}</h2>
         <button onClick={ () => {this.popCsv()}} >Hide!</button>
         <button onClick={ () => {this.plusPage()}}>plusPage</button>
         <button onClick={ () => {this.minusPage()}}>minusPage</button>
-
+        <button onClick={ () => {this.setPage()}}>setPage</button>
+        <h3>{this.state.hoge_data}</h3>
       </div>
     )
   }
