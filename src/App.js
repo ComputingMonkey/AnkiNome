@@ -1,17 +1,22 @@
+//! ページリープ機能
+//∆ メトロノーム速度選択機能
+//∆ メトロノーム機能
+//∆ メトロノーム音声
+//∆ メトロノームα波とかに変える
+//∆ ショートカットキー追加
+//∆ ビジュアル
+//∆ csvファイル選択機能
+//∆ ラストデータのバグに対応するために修正
+//∆ 表示項目にnumを追加
+
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-// import Todo from './todo'
-// import Header from './components/header'
 import Main from './components/main'
+
 // import Footer from './components/footer'
 // import Prime from './components/prime.js'
-// import InputForm from './components/sync.js'
-// import CSVReader from 'react-csv-reader'
-// import Papa from 'papaparse'
-// /import fs from 'fs'
-// import {withRouter} from 'react-router-dom';
-// import {databook} from './databook.js'
+
 import * as d3 from 'd3';
 import databook from './root.csv';
 
@@ -32,27 +37,17 @@ d3.csv(databook).then(function(databook) {
 }).catch(function(err) {
   throw err;
 })
-// global.pagebook = pagebook
+
+
+
+// sleep(5, function () {
+//
+//     console.log('5秒経過しました！');
+//
+// });
 
 class App extends React.Component {
   constructor(props) {
-    // var pagebook = []
-    // d3.csv(databook).then(function(databook) {
-    //   var row = [];
-    //   for(let i = 0; i < databook.length; i++){
-    //     row.push(databook[i])
-    //     if(row.length == 10){
-    //       pagebook.push(row);
-    //       row = []
-    //     }
-    //     if(i == databook.length - 1){
-    //       pagebook.push(row);
-    //     }
-    //   }
-    // }).catch(function(err) {
-    //   throw err;
-    // })
-    // global.pagebook = pagebook
     var fixed_data = [[0,'zero'],[1,'ichi'],[2,'zero'],[3,'ichi'],[4,'zero'],[5,'ichi'],[6,'zero'],[7,'ichi'],[8,'zero'],[9,'ichi']];
     var view_data =  [[0,'zero'],[1,'ichi'],[2,'zero'],[3,'ichi'],[4,'zero'],[5,'ichi'],[6,'zero'],[7,'ichi'],[8,'zero'],[9,'ichi']];
     var hoge_data = [[],[]];
@@ -64,34 +59,12 @@ class App extends React.Component {
       page: 0,
       data: [],
       databook: databook,
-      // pagebook: pagebook,
       page: 0,
-      hoge_data: ['default','','','','','','','','',''],
+      metRoop: true,
+      now: new Date(),
+      // hoge_data: ['default','','','','','','','','',''],
     })
     // this.getData = this.getData.bind(this);
-  }
-  // ーーーーーーーーーーcsvーーーーーーーーーー
-  getPagebook() {
-    var pagebook = []
-    d3.csv(databook).then(function(databook) {
-      var row = [];
-      for(let i = 0; i < databook.length; i++){
-        row.push(databook[i])
-        if(row.length == 10){
-          pagebook.push(row);
-          row = []
-        }
-        if(i == databook.length - 1){
-          pagebook.push(row);
-        }
-        // console.log(pagebook);
-      }
-      console.log(pagebook);
-      return pagebook;
-    }).catch(function(err) {
-      throw err;
-    })
-
   }
   popCsv() {
     // for(var i = 0; i < this.state.pagebook.length; i++){
@@ -114,7 +87,7 @@ class App extends React.Component {
       // hidden
       for(var i = this.state.row;i <= 10; i++){
         if(i != 10){
-          mdfd_data.push([ this.state.fixed_data[i][0],'-----' ])
+          mdfd_data.push([ this.state.fixed_data[i][0],'----------' ])
         }
       }
 
@@ -130,13 +103,16 @@ class App extends React.Component {
     }
   }
   plusPage() {
-    if(this.state.page < pagebook.length - 1 ){
+    // ∆ラストのページがうまくいかない
+    if(this.state.page < pagebook.length - 2){
       this.setState({page: this.state.page + 1})
+      this.setPage()
     }
   }
   minusPage() {
     if(this.state.page > 0){
       this.setState({page: this.state.page - 1})
+      this.setPage()
     }
   }
   setPage(){
@@ -151,11 +127,53 @@ class App extends React.Component {
       var meaning = pagebook[page][i]['meaning']
       hoge_data.push([root,meaning])
     }
-    this.setState({hoge_data: hoge_data})
+    this.setState({fixed_data: hoge_data})
   }
+  handleEmailChange(event) {
+    const inputValue = event.target.value;
+    this.setState({page: inputValue})
+  }
+
+  // ーーーーーーーーーーmetronomeーーーーーーーーーー
+  // 1つの関数をゆっくり繰り返す
+  // loopSlowly(func, loop, interval) {
+  //   for(let i = 0; i < loop; i++) {
+  //     setTimeout(func, i * interval);
+  //   }
+  // }
+  //
+  // // ループさせたい処理を用意する
+  // countRowRoop = () => {
+  //   this.countRow()
+  // };
+  //
+  // setInterval( this.countRow, 1000);
+  metRoop(){
+    for(var i = 0; i < 20; i++){
+      this.interval = setInterval(this.tick, 1000);
+      this.countRow();
+      console.log(i);
+    }
+  }
+  // metRoop() {
+  //   var count = 0;
+  //   var countup = function(){
+  //     console.log(count++);
+  //     setTimeout(() => {
+  //       this.countRow();
+  //     }, 2000);
+  //   }
+  //   // const timer = setInterval(this.countRow(), 3000);
+  // }
   render(){
     return (
       <div>
+        <button onClick={() => {this.countRow()}}>row+</button>
+        {/*
+        <button onClick={ () => {this.popCsv()}} >Hide!</button>
+        */}
+        <button onClick={ () => {this.minusPage()}}>-</button>
+        <button onClick={ () => {this.plusPage()}}>+</button>
 
         <table border='2' rules='all'>
           <tbody>
@@ -169,14 +187,21 @@ class App extends React.Component {
             })}
           </tbody>
         </table>
-        <button onClick={() => {this.countRow()}}>row+</button>
-        <h1>{'now:' + (this.state.row - 1)}</h1>
-        <h1>{'next:' + this.state.row}</h1>
-        <h2>{'nowPage:' + this.state.page}</h2>
-        <button onClick={ () => {this.popCsv()}} >Hide!</button>
-        <button onClick={ () => {this.plusPage()}}>plusPage</button>
-        <button onClick={ () => {this.minusPage()}}>minusPage</button>
-        <button onClick={ () => {this.setPage()}}>setPage</button>
+        <form onSubmit={() => {this.handleSubmit()}}>
+          <p>飛びたいページ<br></br>０から始まる</p>
+          {/* inputタグを追加してください */}
+          <input
+            value={this.state.page}
+            onChange={(event) => {this.handleEmailChange(event)}}
+          />
+          {/* 送信ボタンを追加してください */}
+        </form>
+        <button class='setPage' onClick={ () => {this.setPage()}}>setPage</button>
+        <button class='setPage' onClick={ () => {this.metRoop()}}>metRoop</button>
+        <h3>{'now:' + (this.state.row - 1)}</h3>
+        <h3>{'next:' + this.state.row}</h3>
+        <h3>{'nowPage:' + this.state.page}</h3>
+
         <h3>{this.state.hoge_data}</h3>
       </div>
     )
@@ -185,25 +210,3 @@ class App extends React.Component {
 
 
 export default App;
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Reactへようこそ
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }

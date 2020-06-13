@@ -15,6 +15,7 @@
     "react-native-fs": "^2.16.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "sleep": "^6.2.0",
     "xhr2": "^0.2.0",
     "xmlhttprequest": "^1.8.0",
     "xmlhttprequest2": "^1.0.1"
