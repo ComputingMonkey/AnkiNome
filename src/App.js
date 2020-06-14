@@ -4,7 +4,8 @@
 //! データをgogengo!rootにしてみる
 //! ビジュアル
 
-
+//∆ 間違えた時用のrowreset
+//∆ なんか数字入力するとこがよくわからんくなるバグの修正
 //∆ メトロノーム停止機能
 //∆ 全部意味が表示される時のインターバル
 //∆ メトロノーム速度選択機能
@@ -113,18 +114,18 @@ class App extends React.Component {
     // ∆ラストのページがうまくいかない
     if(this.state.page < pagebook.length - 2){
       this.setState({page: this.state.page + 1})
-      this.setPage()
+      this.setPage(this.state.page)
     }
   }
   minusPage() {
     if(this.state.page > 0){
       this.setState({page: this.state.page - 1})
-      this.setPage()
+      this.setPage(this.state.page)
     }
   }
-  setPage(){
+  setPage(page){
     // var pagebook = this.getPagebook()
-    var page = this.state.page
+    // var page = this.state.page
     // this.setState({hoge_data: pagebook[page]})
     var hoge_data = []
     for(var i = 0; i < pagebook[page].length; i++){
@@ -139,7 +140,7 @@ class App extends React.Component {
     this.setState({fixed_data: hoge_data})
   }
   handleEmailChange(event) {
-    const inputValue = event.target.value;
+    const inputValue = Number(event.target.value);
     this.setState({page: inputValue})
   }
 
@@ -219,12 +220,13 @@ class App extends React.Component {
             <p>飛びたいページ<br></br>０から始まる</p>
           */}
           <input
+            type='number'
             value={this.state.page}
             onChange={(event) => {this.handleEmailChange(event)}}
           />
           {/* 送信ボタンを追加してください */}
         </form>
-        <button class='setPage container' onClick={ () => {this.setPage()}}>setPage</button>
+        <button class='setPage container' onClick={ () => {this.setPage(this.state.page)}}>setPage</button>
 
         <h3>{'Now:' + (this.state.row - 1)}</h3>
         <h3>{'Next:' + this.state.row}</h3>

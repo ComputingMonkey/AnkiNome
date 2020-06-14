@@ -1,6 +1,8 @@
 body{
   background-color: #383838;
   color: #D4D4D4;
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+
 }
 form {
   padding-top: 60px;
@@ -16,6 +18,9 @@ table {
   }
 }
 .english{
+  font-weight: bold;
+}
+.meaning{
   font-weight: bold;
 }
 tr,td {
@@ -56,7 +61,10 @@ button {
   background-color: lighten(#383838, 20%);
   border-radius: 10px;
 }
-
+input {
+  background-color: #D4D4D4;
+  color: #383838;
+}
 
 .btn-circle-border-double {
   display: inline-block;
