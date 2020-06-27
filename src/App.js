@@ -3,7 +3,13 @@
 //! 表示項目にnumを追加
 //! データをgogengo!rootにしてみる
 //! ビジュアル
+//∆ ファイルのロードを一番上の変数でいじくれるようにする⬅︎ムリ
 
+
+//∆ ページめくる時にrowリセット
+//∆ レベルごとに色が変わる仕組み
+//∆ ビート打つたびになんかかっこいいエフェクト追加したい
+//∆ カラー変更ボタン
 //∆ 間違えた時用のrowreset
 //∆ なんか数字入力するとこがよくわからんくなるバグの修正
 //∆ メトロノーム停止機能
@@ -22,9 +28,9 @@ import Main from './components/main'
 
 // import Footer from './components/footer'
 // import Prime from './components/prime.js'
-
 import * as d3 from 'd3';
 import databook from './root.csv';//§
+
 
 d3.csv(databook, function(databook) { console.log(''); });
 var pagebook = []
@@ -35,11 +41,15 @@ d3.csv(databook).then(function(databook) {
     if(row.length == 10){
       pagebook.push(row);
       row = []
+      // console.log(row);
     }
     if(i == databook.length - 1){
+      // console.log(row);
       pagebook.push(row);
     }
   }
+  console.log(pagebook[89]);
+  console.log(pagebook[90]);
 }).catch(function(err) {
   throw err;
 })
@@ -69,7 +79,7 @@ class App extends React.Component {
       databook: databook,
       page: 0,
       playing: false,
-      bpm: 70,
+      bpm: 80,
       // hoge_data: ['default','','','','','','','','',''],
     })
     // this.getData = this.getData.bind(this);
@@ -83,7 +93,7 @@ class App extends React.Component {
   // ーーーーーーーーーーーーーーーーーーーー
   countRow = () => {
     //
-    if(this.state.row < 10){
+    if(this.state.row <= 10){
       // activate_view_gradually
       var mdfd_data = []
 
@@ -106,6 +116,7 @@ class App extends React.Component {
     }else{
       // Undo
       // var fixed_data = [[0,'zero'],[1,'ichi']];
+
       this.setState({view_data: this.state.fixed_data})
       this.setState({row: 0})
     }
@@ -131,9 +142,9 @@ class App extends React.Component {
     for(var i = 0; i < pagebook[page].length; i++){
       //∆ var num = pagebook[page][i]['num']
       console.log(pagebook[page][i])
-      var root = pagebook[page][i]['root']
+      var root = pagebook[page][i]['front']
       console.log(root);
-      var meaning = pagebook[page][i]['meaning']
+      var meaning = pagebook[page][i]['back']
       hoge_data.push([root,meaning])
       //∆ hoge_data.push([num,root,meaning])
     }
@@ -161,11 +172,13 @@ class App extends React.Component {
   metRoop = () => {
     if(!this.state.playing){
       this.timer = setInterval(this.countRow,(60 / this.state.bpm) * 1000);
+
       this.setState({playing: true})
     }
   }
   doNothing = () => {
-
+    console.log('nothing');
+    this.setState({row: this.state.row})
   }
 
   // startStop = () => {
@@ -229,8 +242,11 @@ class App extends React.Component {
         <button class='setPage container' onClick={ () => {this.setPage(this.state.page)}}>setPage</button>
 
         <h3>{'Now:' + (this.state.row - 1)}</h3>
+        {/*
         <h3>{'Next:' + this.state.row}</h3>
         <h3>{'Page:' + this.state.page}</h3>
+        */}
+        <h2 class='bpm'>{'Bpm:' + this.state.bpm}</h2>
 
         <h3>{this.state.hoge_data}</h3>
       </div>
