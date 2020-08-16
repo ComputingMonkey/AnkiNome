@@ -79,7 +79,7 @@ class App extends React.Component {
       databook: databook,
       page: 0,
       playing: false,
-      bpm: 80,
+      bpm: 70,
       // hoge_data: ['default','','','','','','','','',''],
     })
     // this.getData = this.getData.bind(this);
@@ -241,10 +241,10 @@ class App extends React.Component {
         </form>
         <button class='setPage container' onClick={ () => {this.setPage(this.state.page)}}>setPage</button>
 
-        <h3>{'Now:' + (this.state.row - 1)}</h3>
-        {/*
-        <h3>{'Next:' + this.state.row}</h3>
         <h3>{'Page:' + this.state.page}</h3>
+        {/*
+        <h3>{'Now:' + (this.state.row - 1)}</h3>
+        <h3>{'Next:' + this.state.row}</h3>
         */}
         <h2 class='bpm'>{'Bpm:' + this.state.bpm}</h2>
 

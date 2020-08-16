@@ -1,20 +1,22 @@
 $white: #D4D4D4;
-$dark: #383838;//black
 $dark: #12343E;//green
 $dark: #21124D;//purple
+$dark: #383838;//black
 $dark: #002a4f;//blue
 
 tr,td {
   border: 1px solid $white;
   height: 60px;
   .english{
-    width: 100px;
+    width: 150px;
+    font-size: 40px;//綺麗にしたいなら消す
   }
   font-size-adjust: auto;
   .meaning{
     width:800px;
     text-align: left;
     padding-left: 10px;
+    // font-size: 30px;//綺麗にしたいなら消す
 
   }
   margin: auto;
@@ -41,7 +43,7 @@ table {
 }
 .english{
   // width: 150px;
-  font-weight: bold;
+  // font-weight: bold;
 }
 .meaning{
   font-weight: bold;
