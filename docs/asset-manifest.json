@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/AnkiNome/static/css/main.c1ba761a.chunk.css",
+    "main.js": "/AnkiNome/static/js/main.c6010baa.chunk.js",
+    "main.js.map": "/AnkiNome/static/js/main.c6010baa.chunk.js.map",
+    "runtime-main.js": "/AnkiNome/static/js/runtime-main.bc8efa75.js",
+    "runtime-main.js.map": "/AnkiNome/static/js/runtime-main.bc8efa75.js.map",
+    "static/js/2.693c7ade.chunk.js": "/AnkiNome/static/js/2.693c7ade.chunk.js",
+    "static/js/2.693c7ade.chunk.js.map": "/AnkiNome/static/js/2.693c7ade.chunk.js.map",
+    "index.html": "/AnkiNome/index.html",
+    "precache-manifest.425b418f36e9323177f4989196645455.js": "/AnkiNome/precache-manifest.425b418f36e9323177f4989196645455.js",
+    "service-worker.js": "/AnkiNome/service-worker.js",
+    "static/css/main.c1ba761a.chunk.css.map": "/AnkiNome/static/css/main.c1ba761a.chunk.css.map",
+    "static/js/2.693c7ade.chunk.js.LICENSE.txt": "/AnkiNome/static/js/2.693c7ade.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/AnkiNome/static/media/logo.5d5d9eef.svg",
+    "static/media/root.csv": "/AnkiNome/static/media/root.b215b9a0.csv"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bc8efa75.js",
+    "static/js/2.693c7ade.chunk.js",
+    "static/css/main.c1ba761a.chunk.css",
+    "static/js/main.c6010baa.chunk.js"
+  ]
+}
