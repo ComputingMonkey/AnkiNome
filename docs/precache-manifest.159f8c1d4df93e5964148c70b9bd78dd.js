@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "43255c39a0da448c076c522ed3cfcf55",
+    "revision": "74bc3c0b77fe47c9faa03de2ce027222",
     "url": "/AnkiNome/index.html"
   },
   {
-    "revision": "a6f6b0011799da1e6f65",
-    "url": "/AnkiNome/static/css/main.c1ba761a.chunk.css"
+    "revision": "2695ad6ec08388fa8222",
+    "url": "/AnkiNome/static/css/main.b1acef69.chunk.css"
   },
   {
     "revision": "3935ab77890adfc1b46c",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/AnkiNome/static/js/2.693c7ade.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a6f6b0011799da1e6f65",
-    "url": "/AnkiNome/static/js/main.c6010baa.chunk.js"
+    "revision": "2695ad6ec08388fa8222",
+    "url": "/AnkiNome/static/js/main.c110bbe0.chunk.js"
   },
   {
     "revision": "b5a159563dd08366c313",
@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/AnkiNome/static/media/logo.5d5d9eef.svg"
   },
   {
-    "revision": "b215b9a081640feceb9e1dc20774f75e",
-    "url": "/AnkiNome/static/media/root.b215b9a0.csv"
+    "revision": "c7de0948e59edb5919ceb3921caff010",
+    "url": "/AnkiNome/static/media/root.c7de0948.csv"
   }
 ]);
