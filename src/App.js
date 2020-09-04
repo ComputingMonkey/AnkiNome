@@ -208,8 +208,7 @@ class App extends React.Component {
         <button onClick={() => {this.countRow()}}>row+</button>
         <button onClick={ () => {this.popCsv()}} >Hide!</button>
         */}
-        <button class='container' onClick={ () => {this.minusPage()}}>−</button>
-        <button class='container' onClick={ () => {this.plusPage()}}>+</button>
+
         <button class='btn-circle-border-double' onClick={ () => {this.metRoop()}}>MetRoop</button>
 
 
@@ -224,6 +223,17 @@ class App extends React.Component {
                 />
               )
             })}
+            <tr>
+              <td class='english'>
+
+              </td>
+              <td class='meaning'>
+                <button class='container' onClick={ () => {this.minusPage()}}>−</button>
+                <button class='container' onClick={ () => {this.plusPage()}}>+</button>
+
+              </td>
+
+            </tr>
           </tbody>
         </table>
         <form onSubmit={() => {this.handleSubmit()}}>

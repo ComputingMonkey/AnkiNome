@@ -3,9 +3,10 @@ $dark: #12343E;//green
 $dark: #21124D;//purple
 $dark: #383838;//black
 $dark: #002a4f;//blue
-
 tr,td {
   border: 1px solid $white;
+}
+tr,td p{
   height: 60px;
   .english{
     width: 150px;
@@ -16,11 +17,17 @@ tr,td {
   .meaning{
     width:800px;
     text-align: left;
-    padding-left: 10px;
+    // padding-left: 10px;
     font-size: 30px;//綺麗にしたいなら消す
-
+    // text-overflow: ellipsis;
   }
   margin: auto;
+}
+.overflow{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500px;
 }
 body{
   background-color: $dark;
@@ -41,6 +48,7 @@ table {
     color: #D8D8A7;
   }
   border-radius: 4px;
+
 }
 .english{
   // width: 150px;
@@ -48,6 +56,17 @@ table {
 }
 .meaning{
   font-weight: bold;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // white-space: nowrap;
+  height: 20px;
+  width:100px;
+
+}
+.meaning {
+  // width: 50px;
+
 }
 
 tbody {
@@ -59,8 +78,12 @@ tbody {
   transform: translateY(-50%) translateX(-10%);    /* 要素自体の半分、上と左にずらす */
   padding: 20px;
 }
+table {
+  // width: 1000px;
+  // table-layout: fixed;
+}
 button {
-  float: right;
+  float: left;
 }
 .setPage{
   float: left;
@@ -77,6 +100,9 @@ input {
   background-color: $white;
   color: $dark;
 }
+
+
+
 
 .btn-circle-border-double {
   display: inline-block;
